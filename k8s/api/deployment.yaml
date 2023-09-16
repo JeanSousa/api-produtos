@@ -26,19 +26,19 @@ spec:
           envFrom: 
             - configMapRef:
                 name: api-configmap
-          # AGORA VOU PEGAR SO O VALOR DO CONFIG MAP DO MONGO PARA AS VARIAVEIS
+          # AGORA VOU PEGAR SO O VALOR DO SECRET DO MONGO PARA AS VARIAVEIS
           # QUE JA EXISTEM NELE
           env: 
             - name: Mongo__User 
-              # PEGO O VALOR DO CONFIG MAP DO MONGO DE ACORDO COM A CHAVE
+              # PEGO O VALOR DO SECRET DO MONGO DE ACORDO COM A CHAVE
               valueFrom:
-                configMapKeyRef:
-                  # CHAVE DO CONFIG MAP MONGO DB
+                secretKeyRef:
+                  # CHAVE DO SECRET MONGO DB
                   key: MONGO_INITDB_ROOT_USERNAME
-                  # NOME DO CONFIG MAP
-                  name: mongodb-configmap
+                  # NOME DO SECRET
+                  name: mongodb-secret
             - name: Mongo__Password
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: MONGO_INITDB_ROOT_PASSWORD
-                  name: mongodb-configmap
+                  name: mongodb-secret

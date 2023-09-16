@@ -19,5 +19,5 @@ spec:
           # ENVFROM É PARA BUSCAR AS VARIAVEIS DE AMBIENTE DE ALGUM LUGAR
           # NESSE CASO DO CONFIGMAP, COMO AS CHAVES SÃO IGUAIS FAÇO PRO REFERENCIA
           envFrom:
-            - configMapRef:
-                name: mongodb-configmap
+            - secretRef:
+                name: mongodb-secret
