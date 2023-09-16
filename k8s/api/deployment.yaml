@@ -21,14 +21,24 @@ spec:
             name: https # IMAGE PULL POLICE É A REGRA PARA PULL DE IMAGEM
             # Always = sempre faz o pull da imagem
           imagePullPolicy: Always
+          # ENVFROM É PARA BUSCAR AS VARIAVEIS DE AMBIENTE DE ALGUM LUGAR
+          # NESSE CASO DO CONFIGMAP
+          envFrom: 
+            - configMapRef:
+                name: api-configmap
+          # AGORA VOU PEGAR SO O VALOR DO CONFIG MAP DO MONGO PARA AS VARIAVEIS
+          # QUE JA EXISTEM NELE
           env: 
-            - name: Mongo__Host
-              value: "mongo-service"
             - name: Mongo__User 
-              value: "mongouser"
+              # PEGO O VALOR DO CONFIG MAP DO MONGO DE ACORDO COM A CHAVE
+              valueFrom:
+                configMapKeyRef:
+                  # CHAVE DO CONFIG MAP MONGO DB
+                  key: MONGO_INITDB_ROOT_USERNAME
+                  # NOME DO CONFIG MAP
+                  name: mongodb-configmap
             - name: Mongo__Password
-              value: "mongopwd"
-            - name: Mongo__Port 
-              value: "27017"
-            - name: Mongo__Database
-              value: "admin"
+              valueFrom:
+                configMapKeyRef:
+                  key: MONGO_INITDB_ROOT_PASSWORD
+                  name: mongodb-configmap
