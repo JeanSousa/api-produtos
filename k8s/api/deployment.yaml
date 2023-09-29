@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: api 
-          image:  jeansousa/pedelogo-catalogo:v1.0.0
+          image:  kubedevjean.azurecr.io/pedelogo-catalogo:v1.0.0
           ports:
           - containerPort: 80
             name: http 
@@ -42,3 +42,5 @@ spec:
                 secretKeyRef:
                   key: MONGO_INITDB_ROOT_PASSWORD
                   name: mongodb-secret
+      imagePullSecrets:
+        - name: acr-kubedev
